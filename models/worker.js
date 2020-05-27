@@ -88,8 +88,8 @@ function validate(worker){
         email: joi.string().alphanum().email().required(),
         phoneNumber: joi.number().min(1000000000).max(9999999999),
         password: joi.alphanum().min(4).max(255).require(),
-        addressId: joi.string().required(),
-        jobId: joi.string()
+        addressId: joi.objectId(),
+        jobId: joi.objectId()
     }
     return joi.validate(worker,schema);
 
