@@ -7,6 +7,7 @@ require('./startup/databaseStartup')();
 require('./startup/extraTools')(app);
 require('./startup/validation')();
 require('./startup/logging')();
+require('./startup/config');
 
 
 const port = process.env.PORT || 3000;

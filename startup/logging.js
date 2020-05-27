@@ -11,7 +11,7 @@ module.exports = function(){
     );
     const logger = createLogger({
         format: combine(
-          label({ label: 'right meow!' }),
+          label({ label: 'something wrong' }),
           timestamp(),
           prettyPrint(),
           colorize()

@@ -4,6 +4,6 @@ const debug = require('debug');
 
 module.exports = function(){
     mongoose.connect('mongodb://localhost/worker-hiring-system',{ useNewUrlParser: true,useUnifiedTopology: true })
-    .then(()=>{winston.log('Database is Connected..')});
+    .then(()=>{winston.info('Database is Connected..')});
 } 
 

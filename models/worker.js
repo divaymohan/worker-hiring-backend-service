@@ -74,16 +74,8 @@ const workerSchema = new mongoose.Schema({
 
         })
     },
-    work:{
-        type: new mongoose.Schema({
-            _id: {
-                type: String
-            },
-            work: {
-                type: Array
-            }
-
-        })
+    job:{
+        type: Array    
     }
 });
 //function to check the data from req.body of post requist
@@ -97,8 +89,13 @@ function validate(worker){
         phoneNumber: joi.number().min(1000000000).max(9999999999),
         password: joi.alphanum().min(4).max(255).require(),
         addressId: joi.string().required(),
-        workId: joi.string().required()
+        jobId: joi.string()
     }
     return joi.validate(worker,schema);
 
+}
+
+module.exports = {
+    workerSchema: workerSchema,
+    validate: validate
 }

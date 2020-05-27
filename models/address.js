@@ -65,3 +65,8 @@ function validate(address){
     return joi.validate(address,schema);
 
 }
+
+module.exports = {
+    addressSchema: addressSchema,
+    validate: validate
+}
