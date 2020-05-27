@@ -73,6 +73,10 @@ const customerSchema = new mongoose.Schema({
             }
 
         })
+    },
+    isSpecial: {
+        type: Boolean,
+        default: false
     }
     
 });
@@ -86,7 +90,8 @@ function validate(customer){
         email: joi.string().alphanum().email().required(),
         phoneNumber: joi.number().min(1000000000).max(9999999999),
         password: joi.alphanum().min(4).max(255).require(),
-        addressId: joi.objectId()
+        addressId: joi.objectId(),
+        isSpecial: joi.bool()
     }
     return joi.validate(customer,schema);
 

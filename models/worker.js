@@ -76,6 +76,11 @@ const workerSchema = new mongoose.Schema({
     },
     job:{
         type: Array    
+    },
+    pricePerDay:{
+        type:Number,
+        required: true,
+        min: 0
     }
 });
 //function to check the data from req.body of post requist
@@ -89,7 +94,8 @@ function validate(worker){
         phoneNumber: joi.number().min(1000000000).max(9999999999),
         password: joi.alphanum().min(4).max(255).require(),
         addressId: joi.objectId(),
-        jobId: joi.objectId()
+        jobId: joi.objectId(),
+        pricePerDay: joi.number().min(0)
     }
     return joi.validate(worker,schema);
 
