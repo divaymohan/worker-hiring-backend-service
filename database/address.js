@@ -43,8 +43,6 @@ async function updateAddress(id,_address){
 }
 //delete one
 async function deleteAddress(id){
-    let address = await Address.findById(id);
-    if(!address) return;
     return await Address.deleteOne({_id:id});
 }
 
