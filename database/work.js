@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const {workSchema} = require('../models/work');
 
-//modal
+//building a modal
 const Work = mongoose.model('Work',workSchema);
 //return all works
 async function getWorks(){
