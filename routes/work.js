@@ -16,7 +16,14 @@ Router.get('/:id', async (req,res)=>{
 Router.post('/',async (req,res)=>{
     const {error} = validate(req.body);
     if(error) return res.status(400).send(error.details[0].message);
-    return await addWork(req.body);
+    try{
+        const result = await addWork(req.body);
+        res.send(result);
+    }
+    catch(err){
+        return res.send(err.message);
+    }
+    
 });
 
 

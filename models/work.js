@@ -10,11 +10,11 @@ const workSchema = new mongoose.Schema({
     }
 });
 
-function validate(work){
+function validate(_work){
     const schema = {
         work: joi.string().required().min(3)
     }
-    return joi.validate(work,schema);
+    return joi.validate(_work,schema);
 
 }
 

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const {workSchemas} = require('../models/work');
+const {workSchema} = require('../models/work');
 
 //modal
 const Work = mongoose.model('Work',workSchema);
@@ -15,10 +15,10 @@ async function getWork(id){
 }
 //add new work to database
 async function addWork(_work){
-    const work = new Work({
+    const new_work = new Work({
         work: _work.work
     });
-    return await work.save();
+    return await new_work.save();
 }
 //update a already exists
 async function updateWork(id,_work){
