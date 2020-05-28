@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const {workSchema,validate} = require('../models/work');
+const {workSchemas} = require('../models/work');
 
 //modal
 const Work = mongoose.model('Work',workSchema);
@@ -32,3 +32,10 @@ async function deleteWork(id){
     return await Work.deleteOne({_id:id});
 }
 
+module.exports = {
+    getWorks: getWorks,
+    getWork: getWork,
+    updateWork: updateWork,
+    deleteWork: deleteWork,
+    addWork: addWork
+}
