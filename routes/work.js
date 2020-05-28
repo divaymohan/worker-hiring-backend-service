@@ -26,15 +26,15 @@ Router.post('/',async (req,res)=>{
 });
 Router.put('/:id',async (req,res)=>{
     const {error} = validate(req.body);
-    if(error) res.status(400).send(error.details[0].message);
+    if(error) return res.status(400).send(error.details[0].message);
     const result = await updateWork(req.params.id,req.body);
-    if(!result) res.status(400).send(`No work is founded with id ${req.params.id}`);
-    res.send(result);
+    if(!result) return res.status(400).send(`No work is founded with id ${req.params.id}`);
+    return res.send(result);
 });
 Router.delete('/:id',async (req,res)=>{
     const result = await deleteWork(req.params.id);
-    if(result.n==0) res.status(400).send(`No work found with id ${req.params.id}`);
-    return result;
+    if(result.n==0) return res.status(400).send(`No work found with id ${req.params.id}`);
+    return res.send(result);
 });
 
 
