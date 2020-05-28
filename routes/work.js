@@ -13,6 +13,12 @@ Router.get('/:id', async (req,res)=>{
     if(!work) return res.status(400).send(`No work found with id ${req.params.id}`);
     return res.send(work);
 });
+Router.post('/',async (req,res)=>{
+    const {error} = validate(req.body);
+    if(error) return res.status(400).send(error.details[0].message);
+    return await addWork(req.body);
+});
+
 
 
 module.exports = Router;
