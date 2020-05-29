@@ -23,8 +23,8 @@ const addressSchema = new mongoose.Schema({
     },
     pin:{
         type:Number,
-        minlength: 6,
-        maxlength: 6,
+        min: 100000,
+        max: 999999,
         required: true
 
     },
@@ -57,7 +57,7 @@ function validate(address){
         houseNumber: joi.number(),
         city: joi.string().min(3).max(50).required(),
         country: joi.string().min(3).max(50).required(),
-        pin: joi.number().min(6).max(6).required(),
+        pin: joi.number().min(100000).max(999999).required(),
         street: joi.string().min(3).max(255),
         area: joi.string().min(3).max(255),
         landmark: joi.string().min(3).max(255).required()

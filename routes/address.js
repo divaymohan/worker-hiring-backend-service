@@ -9,7 +9,8 @@ Router.get('/',async (req,res)=>{
     return res.send(result);
 });
 Router.get('/:id',async (req,res)=>{
-    const result = await getAddress(id);
+    const result = await getAddress(req.params.id);
+    if(!result) res.status(400).send(`no address found with id ${req.params.id}`)
     return res.send(result);
 });
 Router.post('/',async (req,res)=>{
@@ -25,7 +26,7 @@ Router.put('/:id',async (req,res)=>{
     return res.send(result);
 });
 Router.delete('/:id',async (req,res)=>{
-    const result = await deleteAddress(id);
+    const result = await deleteAddress(req.params.id);
     if(result.n==0) return res.status(400).send(`No Address found with id ${req.params.id}`);
     return res.send(result);
 });
