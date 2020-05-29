@@ -16,7 +16,7 @@ async function getWorker(id){
 }
 //get one worker by username
 async function getWorkerByUserName(_username){
-    const worker = await Worker.findOne({userName: username});
+    const worker = await Worker.findOne({userName: _username});
     if(!worker) return;
     return worker;
 } 
@@ -47,6 +47,7 @@ async function addWorker(_worker){
     });
     return await worker.save();
 }
+
 
 module.exports = {
     getWorker: getWorker,
