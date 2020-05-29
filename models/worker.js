@@ -75,9 +75,7 @@ const workerSchema = new mongoose.Schema({
 
         })
     },
-    skills:{
-        type: [workSchema]    
-    },
+    skills: [workSchema],
     pricePerDay:{
         type:Number,
         required: true,
@@ -95,7 +93,7 @@ function validate(worker){
         phoneNumber: joi.number().min(1000000000).max(9999999999),
         password: joi.string().min(4).max(255).required(),
         addressId: joi.objectId(),
-        workIds: [joi.string()],
+        workIds: joi.array().items(joi.objectId()),
         pricePerDay: joi.number().min(0)
     }
     return joi.validate(worker,schema);

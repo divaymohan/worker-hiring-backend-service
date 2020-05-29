@@ -28,11 +28,12 @@ async function getWorkerByEmail(_email){
 }
 //add new 
 async function addWorker(_worker){
-    const skills = [];
-    for( id in _worker.skills){
-        let work = await Work.findById(id);
-        skills.push(work);
+    const skills=[];
+    console.log(_worker.workIds);
+    for(let i=0;i<_worker.workIds.length;i++){
+        skills.push(await Work.findById(_worker.workIds[i]));
     }
+    console.log(await Work.findById(_worker.workIds[0]));
     const worker = new Worker({
         firstName: _worker.firstName,
         lastName: _worker.lastName,
