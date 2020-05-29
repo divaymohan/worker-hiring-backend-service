@@ -47,6 +47,24 @@ async function addWorker(_worker){
     });
     return await worker.save();
 }
+//update a worker with id
+async function updateWorker(id,_worker){
+    const worker = await Worker.findById(id);
+    if(!worker) return;
+    if(_worker.firstName) worker.firstName = _worker.firstName;
+    if(_worker.lastName) worker.lastName = _worker.lastName;
+    if(_worker.middleName) worker.middleName = _worker.middleName;
+    if(_worker.email) worker.email = _worker.email;
+    if(_worker.userName) worker.userName = _worker.userName;
+    if(_worker.phoneNumber) worker.phoneNumber = _worker.phoneNumber; 
+    if(_worker.password) worker.password = _worker.password;
+    if(_worker.pricePerDay) worker.pricePerDay = _worker.pricePerDay;
+    return await _worker.save();
+}
+//delete one worker with id
+async function deleteWorker(id){
+    return await Worker.deleteOne({_id: id});
+}
 
 
 module.exports = {
