@@ -51,7 +51,6 @@ const addressSchema = new mongoose.Schema({
    
 
 });
-
 function validate(address){
     const schema = {
         houseNumber: joi.number(),
