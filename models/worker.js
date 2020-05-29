@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const joi = require('joi');
 const debug = require('debug')('app:workerSchema');
+const {workSchema} = require('../models/work');
 
 //create schema for worker
 const workerSchema = new mongoose.Schema({
@@ -74,8 +75,8 @@ const workerSchema = new mongoose.Schema({
 
         })
     },
-    job:{
-        type: Array    
+    skills:{
+        type: [workSchema]    
     },
     pricePerDay:{
         type:Number,
@@ -89,12 +90,12 @@ function validate(worker){
         firstName: joi.string().min(4).max(255).required(),
         lastName: joi.string().max(255).min(4).required(),
         middleName: joi.string().max(255).min(4),
-        userName: joi.string().max(255).min(4).alphanum(),
-        email: joi.string().alphanum().email().required(),
+        userName: joi.string().max(255).min(4),
+        email: joi.string().email().required(),
         phoneNumber: joi.number().min(1000000000).max(9999999999),
-        password: joi.alphanum().min(4).max(255).require(),
+        password: joi.string().min(4).max(255).required(),
         addressId: joi.objectId(),
-        jobId: joi.objectId(),
+        workIds: [joi.string()],
         pricePerDay: joi.number().min(0)
     }
     return joi.validate(worker,schema);

@@ -37,5 +37,6 @@ module.exports = {
     getWork: getWork,
     updateWork: updateWork,
     deleteWork: deleteWork,
-    addWork: addWork
+    addWork: addWork,
+    Work: Work
 }
