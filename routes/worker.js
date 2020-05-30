@@ -1,4 +1,4 @@
-const {getWorker,getWorkers,getWorkerByEmail,getWorkerByUserName,addWorker,addSkills} = require('../database/worker');  
+const {getWorker,getWorkers,getWorkerByEmail,getWorkerByUserName,addWorker,addSkills,removeSkills} = require('../database/worker');  
 const {validate,validateSkills} = require('../models/worker');
 const express = require('express');
 const Router = express.Router();
@@ -35,13 +35,21 @@ Router.post('/',async (req,res)=>{
     return res.send(result);
 });
 //add skills to a existing worker
-Router.post('/add/skill/:id',async (req,res)=>{
+Router.put('/add/skill/:id',async (req,res)=>{
     const {error} = validateSkills(req.body);
     if(error) return res.status(400).send(error.details[0].message);
     const result = await addSkills(req.params.id,req.body)
     if(!result) return res.status(400).send(`No worker found with id ${req.params.id}`);
     return res.send(result);
 }); 
+//remove skills
+Router.delete('/remove/skill/:id',async (req,res)=>{
+    const {error} = validateSkills(req.body);
+    if(error) return res.status(400).send(error.details[0].message);
+    const result = await removeSkills(req.params.id,req.body);
+    if(!result) return res.status(400).send(`No worker found with id ${req.params.id}`);
+    return res.send(result);
+});
 
 
 module.exports = Router;

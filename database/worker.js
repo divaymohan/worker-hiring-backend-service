@@ -74,9 +74,21 @@ async function addSkills(id,_skills){
     }
     return await worker.save();
 }
-
-
 //remove the skills
+async function removeSkills(id,_skills){
+    const worker = await Worker.findById(id);
+    if(!worker) return;
+    for(let i =0;i< _skills.skills.length;i++){
+        let work = await Work.findById(_skills.skills[i]);
+
+        let index = worker.skills.indexOf(work);
+        if(index!=-1){
+            worker.skills.splice(index,1);
+        }
+       
+    }
+    return await worker.save();
+}
 
 
 //update the workers details
@@ -94,5 +106,6 @@ module.exports = {
     getWorkerByUserName: getWorkerByUserName,
     getWorkers: getWorkers,
     addWorker: addWorker,
-    addSkills: addSkills
+    addSkills: addSkills,
+    removeSkills: removeSkills
 }
