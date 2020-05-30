@@ -69,8 +69,12 @@ async function addSkills(id,_skills){
     const worker = await Worker.findById(id);
     if(!worker) return;
     for(let i =0;i< _skills.skills.length;i++){
-        let work = await Work.findById(_skills.skills[i]);
-        worker.skills.push(work);
+        
+        const index = worker.skills.findIndex(s => s.id == _skills.skills[i]);
+        if(index==-1){
+            let work = await Work.findById(_skills.skills[i]);
+            worker.skills.push(work);
+        } 
     }
     return await worker.save();
 }
@@ -79,13 +83,10 @@ async function removeSkills(id,_skills){
     const worker = await Worker.findById(id);
     if(!worker) return;
     for(let i =0;i< _skills.skills.length;i++){
-        let work = await Work.findById(_skills.skills[i]);
-
-        let index = worker.skills.indexOf(work);
+        const index = worker.skills.findIndex(s => s.id == _skills.skills[i]);
         if(index!=-1){
             worker.skills.splice(index,1);
-        }
-       
+        } 
     }
     return await worker.save();
 }
