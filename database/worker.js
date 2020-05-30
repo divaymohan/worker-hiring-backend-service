@@ -65,6 +65,15 @@ async function updateWorker(id,_worker){
 
 
 //add the skills
+async function addSkills(id,_skills){
+    const worker = await Worker.findById(id);
+    if(!worker) return;
+    for(let i =0;i< _skills.skills.length;i++){
+        let work = await Work.findById(_skills.skills[i]);
+        worker.skills.push(work);
+    }
+    return await worker.save();
+}
 
 
 //remove the skills

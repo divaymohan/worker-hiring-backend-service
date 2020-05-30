@@ -99,6 +99,13 @@ function validate(worker){
     return joi.validate(worker,schema);
 
 }
+function validateSkills(_skills){
+    const schema = {
+        skills: joi.array().items(joi.objectId())
+    }
+    return joi.validate(_skills,schema);
+
+}
 
 module.exports = {
     workerSchema: workerSchema,
