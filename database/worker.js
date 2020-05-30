@@ -93,5 +93,6 @@ module.exports = {
     getWorkerByEmail: getWorkerByEmail,
     getWorkerByUserName: getWorkerByUserName,
     getWorkers: getWorkers,
-    addWorker: addWorker
+    addWorker: addWorker,
+    addSkills: addSkills
 }

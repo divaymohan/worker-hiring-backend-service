@@ -99,15 +99,16 @@ function validate(worker){
     return joi.validate(worker,schema);
 
 }
+//validation function to add skills 
 function validateSkills(_skills){
     const schema = {
         skills: joi.array().items(joi.objectId())
     }
     return joi.validate(_skills,schema);
-
 }
 
 module.exports = {
     workerSchema: workerSchema,
-    validate: validate
+    validate: validate,
+    validateSkills:validateSkills
 }
