@@ -61,6 +61,18 @@ async function updateWorker(id,_worker){
     if(_worker.pricePerDay) worker.pricePerDay = _worker.pricePerDay;
     return await _worker.save();
 }
+//update the address
+
+
+//add the skills
+
+
+//remove the skills
+
+
+//update the workers details
+
+
 //delete one worker with id
 async function deleteWorker(id){
     return await Worker.deleteOne({_id: id});
