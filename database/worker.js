@@ -91,10 +91,6 @@ async function removeSkills(id,_skills){
     return await worker.save();
 }
 
-
-//update the workers details
-
-
 //delete one worker with id
 async function deleteWorker(id){
     return await Worker.deleteOne({_id: id});
@@ -108,5 +104,7 @@ module.exports = {
     getWorkers: getWorkers,
     addWorker: addWorker,
     addSkills: addSkills,
-    removeSkills: removeSkills
+    removeSkills: removeSkills,
+    updateWorker: updateWorker,
+    deleteWorker:deleteWorker
 }
