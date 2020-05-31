@@ -40,7 +40,7 @@ Router.put('/:id',async (req,res)=>{
     if(error) return res.status(400).send(error.details[0].message);
     const result = await updateWorker(req.params.id,req.body);
     if(!result) return res.status(400).send(`No worker found with id ${req.params.id}`);
-    return res.send(result);+
+    return res.send(result);
 });
 //add skills to a existing worker
 Router.put('/add/skill/:id',async (req,res)=>{
