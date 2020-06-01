@@ -8,6 +8,7 @@ const {
   removeSkills,
   updateWorker,
   deleteWorker,
+  updateAddressOfWorker,
 } = require("../database/worker");
 const { validate, validateSkills } = require("../models/worker");
 const express = require("express");
@@ -43,13 +44,19 @@ Router.get("/byUname/:uname", async (req, res) => {
       .send(`No worker found with uname ${req.params.uname}`);
   return res.send(worker);
 });
-
 //add new worker
 Router.post("/", async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
   const result = await addWorker(req.body);
   return res.send(result);
+});
+//update worker address
+Router.put("/update/address/:id", async (req, res) => {
+  const worker = await updateAddressOfWorker(req.params.id, req.body);
+  if (!worker)
+    return res.status(400).send(`No worker found with id ${req.params.id}`);
+  return res.send(worker);
 });
 //update worker
 Router.put("/:id", async (req, res) => {

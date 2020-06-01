@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { workerSchema } = require("../models/worker");
 const { addressSchema } = require("../models/address");
-const { Address, addAddress } = require("./address");
+const { Address, addAddress, updateAddress } = require("./address");
 const { Work } = require("./work");
 //creating model
 const Worker = mongoose.model("Worker", workerSchema);
@@ -104,6 +104,20 @@ async function removeSkills(id, _skills) {
   }
   return await worker.save();
 }
+async function updateAddressOfWorker(id, _address) {
+  const worker = await Worker.findById(id);
+  //console.log(worker);
+  if (!worker) return;
+  if (worker.address) {
+    let address = await Address.findById(worker.address._id);
+    address = await updateAddress(address._id, _address);
+    worker.address = address;
+  } else {
+    let adrs = await addAddress(_address);
+    worker.address = adrs;
+  }
+  return await worker.save();
+}
 
 //delete one worker with id
 async function deleteWorker(id) {
@@ -120,4 +134,5 @@ module.exports = {
   removeSkills: removeSkills,
   updateWorker: updateWorker,
   deleteWorker: deleteWorker,
+  updateAddressOfWorker: updateAddressOfWorker,
 };
