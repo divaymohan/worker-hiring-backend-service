@@ -140,7 +140,7 @@ Body:-
 }
 ```
 ## 2. Address end point :
-* ### get the list of all addresses present in database:- 
+* ### get the list of all addresses present in database(Get request):- 
 ```
 End Point:- 
 
@@ -179,4 +179,24 @@ Response:-
         "__v": 0
     }
 ]
+```
+* ### Get one address by id(Get Request):- 
+```
+End Point:- 
+
+localhost:3000/api/hiring/address/(id)
+```
+```json
+Response:- 
+{
+    "country": "India",
+    "_id": "id",
+    "houseNumber": 34,
+    "city": "delhi",
+    "pin": 953636,
+    "street": "gandhi road",
+    "area": "kalyan",
+    "landmark": "india gate",
+    "__v": 0
+}
 ```
