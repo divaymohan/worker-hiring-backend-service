@@ -35,7 +35,7 @@ Note:-
 
 2. If we pass an id in body then that id should be present in database.
 ```
-## 1. Work or Type of job :
+## 1. Work or Type of job end point :
 * ### Get list of all works available. (Get Request):-
 ```
 End Point:- 
@@ -138,4 +138,45 @@ Body:-
     "work": "New work",
     "__v": 0
 }
+```
+## 2. Address end point :
+* ### get the list of all addresses present in database:- 
+```
+End Point:- 
+
+localhost:3000/api/hiring/address
+```
+```json
+Response:-
+[
+    {
+        "country": "India",
+        "_id": "5ed4a93dc6161016cc9373a6",
+        "city": "delhi",
+        "pin": 247345,
+        "street": "colony",
+        "area": "cyber city",
+        "__v": 0
+    },
+    {
+        "country": "India",
+        "_id": "5ed4a956c6161016cc9373a9",
+        "city": "delhi",
+        "pin": 247737,
+        "street": "colony",
+        "area": "cyber city",
+        "__v": 0
+    },
+    {
+        "country": "India",
+        "_id": "5ed4dd2813135a1a284efdb1",
+        "houseNumber": 34,
+        "city": "delhi",
+        "pin": 953636,
+        "street": "gandhi road",
+        "area": "kalyan",
+        "landmark": "india gate",
+        "__v": 0
+    }
+]
 ```
