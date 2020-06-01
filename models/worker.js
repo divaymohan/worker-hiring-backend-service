@@ -59,7 +59,7 @@ const workerSchema = new mongoose.Schema({
   address: {
     type: new mongoose.Schema({
       _id: {
-        type: String,
+        type: objectId,
       },
       city: {
         type: String,
@@ -96,7 +96,7 @@ function validate(worker) {
     email: joi.string().email().required(),
     phoneNumber: joi.number().min(1000000000).max(9999999999),
     password: joi.string().min(4).max(255).required(),
-    addressId: joi.objectId(),
+    address: joi.object(),
     workIds: joi.array().items(joi.objectId()),
     pricePerDay: joi.number().min(0),
   };

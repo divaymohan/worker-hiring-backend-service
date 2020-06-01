@@ -30,11 +30,6 @@ async function getWorkerByEmail(_email) {
 }
 //add new
 async function addWorker(_worker) {
-  const skills = [];
-  console.log(_worker.workIds);
-  for (let i = 0; i < _worker.workIds.length; i++) {
-    skills.push(await Work.findById(_worker.workIds[i]));
-  }
   //console.log(await Work.findById(_worker.workIds[0]));
   const worker = new Worker({
     firstName: _worker.firstName,
@@ -44,11 +39,11 @@ async function addWorker(_worker) {
     email: _worker.email,
     phoneNumber: _worker.phoneNumber,
     password: _worker.password,
-    skills: skills,
     pricePerDay: _worker.pricePerDay,
   });
   if (_worker.address) {
-    const address = await addAddress(_worker);
+    const address = await addAddress(_worker.address);
+    console.log(address);
     worker.address._id = address._id;
     worker.address.city = address.city;
     worker.address.area = address.area;
