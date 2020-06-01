@@ -34,6 +34,10 @@ async function addWorker(_worker) {
   if (_worker.workIds) {
     for (let i = 0; i < _worker.workIds.length; i++) {
       let work = await Work.findById(_worker.workIds[i]);
+      work = {
+        _id: work._id,
+        work: work.work,
+      };
       skills.push(work);
     }
   }
@@ -79,6 +83,10 @@ async function addSkills(id, _skills) {
     const index = worker.skills.findIndex((s) => s.id == _skills.skills[i]);
     if (index == -1) {
       let work = await Work.findById(_skills.skills[i]);
+      work = {
+        _id: work._id,
+        work: work.work,
+      };
       worker.skills.push(work);
     }
   }

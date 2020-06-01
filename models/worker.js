@@ -61,7 +61,12 @@ const workerSchema = new mongoose.Schema({
     type: addressSchema,
   },
   skills: {
-    type: [workSchema],
+    type: [
+      new mongoose.Schema({
+        _id: String,
+        work: String,
+      }),
+    ],
     unique: false,
   },
   pricePerDay: {
