@@ -88,7 +88,7 @@ Router.delete("/remove/skill/:id", async (req, res) => {
 //remove worker
 Router.delete("/:id", async (req, res) => {
   const result = await deleteWorker(req.params.id);
-  if (result.n == 0)
+  if (!result || result.n == 0)
     return res.status(400).send(`No worker found with id ${req.params.id}`);
   return res.send(result);
 });

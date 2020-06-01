@@ -121,6 +121,12 @@ async function updateAddressOfWorker(id, _address) {
 
 //delete one worker with id
 async function deleteWorker(id) {
+  const worker = await Worker.findById(id);
+  if (!worker) return;
+  if (worker.address) {
+    await Address.deleteOne({ _id: worker.address._id });
+  }
+
   return await Worker.deleteOne({ _id: id });
 }
 
