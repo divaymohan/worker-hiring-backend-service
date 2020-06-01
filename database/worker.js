@@ -35,7 +35,7 @@ async function addWorker(_worker) {
   for (let i = 0; i < _worker.workIds.length; i++) {
     skills.push(await Work.findById(_worker.workIds[i]));
   }
-  console.log(await Work.findById(_worker.workIds[0]));
+  //console.log(await Work.findById(_worker.workIds[0]));
   const worker = new Worker({
     firstName: _worker.firstName,
     lastName: _worker.lastName,
@@ -47,6 +47,14 @@ async function addWorker(_worker) {
     skills: skills,
     pricePerDay: _worker.pricePerDay,
   });
+  if (_worker.address) {
+    const address = await addAddress(_worker);
+    worker.address._id = address._id;
+    worker.address.city = address.city;
+    worker.address.area = address.area;
+    worker.address.pin = address.pin;
+    worker.address.street = address.street;
+  }
   return await worker.save();
 }
 //update a worker with id
