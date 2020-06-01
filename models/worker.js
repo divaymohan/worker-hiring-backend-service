@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const joi = require("joi");
 const debug = require("debug")("app:workerSchema");
 const { workSchema } = require("../models/work");
+const { addressSchema } = require("./address");
 
 //create schema for worker
 const workerSchema = new mongoose.Schema({
@@ -57,29 +58,12 @@ const workerSchema = new mongoose.Schema({
     trim: true,
   },
   address: {
-    type: new mongoose.Schema({
-      _id: {
-        type: objectId,
-      },
-      city: {
-        type: String,
-      },
-      area: {
-        type: String,
-      },
-      pin: {
-        type: Number,
-        min: 000001,
-        max: 999999,
-      },
-      street: {
-        type: String,
-        minlength: 3,
-        maxlength: 255,
-      },
-    }),
+    type: addressSchema,
   },
-  skills: [workSchema],
+  skills: {
+    type: [workSchema],
+    unique: false,
+  },
   pricePerDay: {
     type: Number,
     required: true,
