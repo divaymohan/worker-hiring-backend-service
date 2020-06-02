@@ -74,4 +74,5 @@ module.exports = {
   updateCustomer,
   deleteCustomer,
   updateAddressOfCustomer,
+  Customer,
 };

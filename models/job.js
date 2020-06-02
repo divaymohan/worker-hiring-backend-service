@@ -74,3 +74,8 @@ function validate(job) {
   };
   return joi.validate(job, schema);
 }
+
+module.exports = {
+  validate,
+  jobSchema,
+};

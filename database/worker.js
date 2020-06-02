@@ -141,4 +141,5 @@ module.exports = {
   updateWorker: updateWorker,
   deleteWorker: deleteWorker,
   updateAddressOfWorker: updateAddressOfWorker,
+  Worker,
 };
