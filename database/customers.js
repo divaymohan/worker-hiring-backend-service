@@ -31,7 +31,20 @@ async function addCustomer(_customer) {
   return await customer.save();
 }
 
-async function updateCustomer(id, _customer) {}
+async function updateCustomer(id, _customer) {
+  const customer = await Customer.findById(id);
+  if (!customer) return;
+  if (_customer.firstName) customer.firstName = _customer.firstName;
+  if (_customer.lastName) customer.lastName = _customer.lastName;
+  if (_customer.middleName) customer.middleName = _customer.middleName;
+  if (_customer.userName) customer.userName = _customer.userName;
+  if (_customer.email) customer.email = _customer.email;
+  if (_customer.phoneNumber) customer.phoneNumber = _customer.phoneNumber;
+  if (_customer.password) customer.password = _customer.password;
+  if (_customer.address) {
+  }
+  if (_customer.isSpecial) customer.isSpecial = _customer.isSpecial;
+}
 
 async function deleteCustomer(id) {}
 

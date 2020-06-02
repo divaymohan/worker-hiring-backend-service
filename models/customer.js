@@ -93,8 +93,23 @@ function validate(customer) {
   };
   return joi.validate(customer, schema);
 }
+function validateUpdate(customer) {
+  const schema = {
+    firstName: joi.string().min(4).max(255),
+    lastName: joi.string().max(255).min(4),
+    middleName: joi.string().max(255).min(4),
+    userName: joi.string().max(255).min(4),
+    email: joi.string().email(),
+    phoneNumber: joi.number().min(1000000000).max(9999999999),
+    password: joi.string().min(3).max(255),
+    address: joi.object(),
+    isSpecial: joi.bool(),
+  };
+  return joi.validate(customer, schema);
+}
 
 module.exports = {
   customerSchema: customerSchema,
   validate: validate,
+  validateUpdate: validateUpdate,
 };
