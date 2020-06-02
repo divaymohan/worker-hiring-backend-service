@@ -47,5 +47,11 @@ Router.put("/update/address/:id", async (req, res) => {
     return res.status(400).send(`No customer found with id ${req.params.id}`);
   return res.send(customer);
 });
+Router.delete("/:id", async (req, res) => {
+  const result = await deleteCustomer(req.params.id);
+  if (!result)
+    return res.status(400).send(`No customer found with id ${req.params.id}`);
+  return res.send(result);
+});
 
 module.exports = Router;

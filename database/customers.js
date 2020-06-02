@@ -60,7 +60,12 @@ async function updateAddressOfCustomer(id, _address) {
   return await customer.save();
 }
 
-async function deleteCustomer(id) {}
+async function deleteCustomer(id) {
+  const customer = await Customer.findById(id);
+  if (!customer) return;
+  if (customer.address) await Address.deleteOne({ _id: customer.address._id });
+  return await Customer.deleteOne({ _id: id });
+}
 
 module.exports = {
   getCustomer,
