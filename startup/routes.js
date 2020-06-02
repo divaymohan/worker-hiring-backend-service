@@ -9,5 +9,5 @@ module.exports = function (app) {
   app.use("/api/hiring/work", _work);
   app.use("/api/hiring/address", _address);
   app.use("/api/hiring/workers", _worker);
-  app.use("/api/hiring/customer", _customer);
+  app.use("/api/hiring/customers", _customer);
 };
