@@ -58,7 +58,7 @@ const customerSchema = new mongoose.Schema({
   address: {
     type: new mongoose.Schema({
       _id: {
-        type: string,
+        type: String,
       },
       city: {
         type: String,
@@ -84,11 +84,11 @@ function validate(customer) {
     firstName: joi.string().min(4).max(255).required(),
     lastName: joi.string().max(255).min(4).required(),
     middleName: joi.string().max(255).min(4),
-    userName: joi.string().max(255).min(4).alphanum(),
-    email: joi.string().alphanum().email().required(),
+    userName: joi.string().max(255).min(4),
+    email: joi.string().email().required(),
     phoneNumber: joi.number().min(1000000000).max(9999999999),
-    password: joi.alphanum().min(4).max(255).require(),
-    addressId: joi.objectId(),
+    password: joi.string().min(3).max(255),
+    address: joi.object(),
     isSpecial: joi.bool(),
   };
   return joi.validate(customer, schema);
