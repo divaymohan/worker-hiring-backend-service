@@ -41,9 +41,8 @@ async function updateCustomer(id, _customer) {
   if (_customer.email) customer.email = _customer.email;
   if (_customer.phoneNumber) customer.phoneNumber = _customer.phoneNumber;
   if (_customer.password) customer.password = _customer.password;
-  if (_customer.address) {
-  }
   if (_customer.isSpecial) customer.isSpecial = _customer.isSpecial;
+  return await customer.save();
 }
 
 async function deleteCustomer(id) {}

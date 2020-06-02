@@ -28,5 +28,14 @@ Router.post("/", async (req, res) => {
   const customer = await addCustomer(req.body);
   return res.send(customer);
 });
+//update customer
+Router.put("/:id", async (req, res) => {
+  const { error } = validateUpdate(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+  const customer = await updateCustomer(req.params.id, req.body);
+  if (!customer)
+    return res.status(400).send(`Customer not found with id: ${req.params.id}`);
+  return res.send(customer);
+});
 
 module.exports = Router;
