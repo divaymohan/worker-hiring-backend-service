@@ -58,6 +58,10 @@ const jobSchema = new mongoose.Schema({
   dateEnd: {
     type: Date,
   },
+  numberOfDays: {
+    type: Number,
+    min: 1,
+  },
 });
 
 function validate(job) {
@@ -66,6 +70,7 @@ function validate(job) {
     workerId: joi.ObjectId().required(),
     dateStart: joi.Date(),
     dateEnd: joi.Date(),
+    numberOfDays: joi.number().min(1),
   };
   return joi.validate(job, schema);
 }
