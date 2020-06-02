@@ -44,6 +44,20 @@ async function updateCustomer(id, _customer) {
   if (_customer.isSpecial) customer.isSpecial = _customer.isSpecial;
   return await customer.save();
 }
+async function updateAddressOfWorker(id, _address) {
+  const customer = await Customer.findById(id);
+  //console.log(worker);
+  if (!customer) return;
+  if (customer.address) {
+    let address = await Address.findById(customer.address._id);
+    address = await updateAddress(address._id, _address);
+    customer.address = address;
+  } else {
+    let adrs = await addAddress(_address);
+    customer.address = adrs;
+  }
+  return await customer.save();
+}
 
 async function deleteCustomer(id) {}
 

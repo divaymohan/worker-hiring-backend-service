@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const joi = require("joi");
 const debug = require("debug")("app:workerSchema");
-
+const { addressSchema } = require("./address");
 //create schema for customer
 const customerSchema = new mongoose.Schema({
   firstName: {
@@ -66,7 +66,7 @@ const customerSchema = new mongoose.Schema({
       area: {
         type: String,
       },
-      Pin: {
+      pin: {
         type: Number,
         min: 000001,
         max: 999999,
