@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { jobSchema, validate } = require("../models/job");
+const { jobSchema } = require("../models/job");
 const { Customer } = require("./customers");
 const { Worker } = require("./worker");
 //modell
@@ -16,4 +16,17 @@ async function getJob(id) {
   return job;
 }
 //create job
-async function addJob(_job) {}
+async function addJob(_job) {
+  const customer = await Customer.findById(_job.customerId);
+  if (!customer) return;
+  const worker = await Worker.findById(_job.workerId);
+  if (!worker) return;
+  const job = new Job({
+    customer: customer,
+    worker: worker,
+    dateStart: _job.dateStart,
+    dateEnd: _job.dateEnd,
+    numberOfDays: _job.numberOfDays,
+  });
+  return await job.save();
+}
