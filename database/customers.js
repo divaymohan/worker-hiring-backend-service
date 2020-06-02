@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const { validate, customerSchema } = require("../models/customer");
-const { addAddress } = require("./address");
+const { addAddress, updateAddress } = require("./address");
+const { Address } = require("./address");
 //model
 const Customer = mongoose.model("Customer", customerSchema);
 
@@ -44,7 +45,7 @@ async function updateCustomer(id, _customer) {
   if (_customer.isSpecial) customer.isSpecial = _customer.isSpecial;
   return await customer.save();
 }
-async function updateAddressOfWorker(id, _address) {
+async function updateAddressOfCustomer(id, _address) {
   const customer = await Customer.findById(id);
   //console.log(worker);
   if (!customer) return;
@@ -67,4 +68,5 @@ module.exports = {
   addCustomer,
   updateCustomer,
   deleteCustomer,
+  updateAddressOfCustomer,
 };

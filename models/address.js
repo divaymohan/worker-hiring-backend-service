@@ -55,4 +55,5 @@ function validate(address) {
 module.exports = {
   addressSchema: addressSchema,
   validate: validate,
+  validatAdd: validate,
 };
