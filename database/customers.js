@@ -4,12 +4,15 @@ const { addAddress } = require("./address");
 //model
 const Customer = mongoose.model("Customer", customerSchema);
 
+//get all customers
 async function getCustomers() {
   return await Customer.find();
 }
+//get one customer by id
 async function getCustomer(id) {
   return await Customer.findById(id);
 }
+//add new address
 async function addCustomer(_customer) {
   const customer = new Customer({
     firstName: _customer.firstName,
@@ -23,11 +26,19 @@ async function addCustomer(_customer) {
   });
   if (_customer.address) {
     const address = await addAddress(_customer.address);
-    worker.address = address;
+    customer.address = address;
   }
-  return await worker.save();
+  return await customer.save();
 }
 
 async function updateCustomer(id, _customer) {}
 
 async function deleteCustomer(id) {}
+
+module.exports = {
+  getCustomer,
+  getCustomers,
+  addCustomer,
+  updateCustomer,
+  deleteCustomer,
+};
