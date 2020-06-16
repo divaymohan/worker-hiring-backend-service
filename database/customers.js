@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 const { validate, customerSchema } = require("../models/customer");
 const { addAddress, updateAddress } = require("./address");
 const { Address } = require("./address");
@@ -25,6 +26,8 @@ async function addCustomer(_customer) {
     password: _customer.password,
     isSpecial: _customer.isSpecial,
   });
+  const salt = await bcrypt.genSalt(10);
+  customer.password = await bcrypt.hash(customer.password, salt);
   if (_customer.address) {
     const address = await addAddress(_customer.address);
     customer.address = address;
