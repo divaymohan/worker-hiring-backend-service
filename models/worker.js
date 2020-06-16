@@ -3,6 +3,7 @@ const joi = require("joi");
 const debug = require("debug")("app:workerSchema");
 const { workSchema } = require("../models/work");
 const { addressSchema } = require("./address");
+const jwt = require("jsonwebtoken");
 
 //create schema for worker
 const workerSchema = new mongoose.Schema({
@@ -75,6 +76,13 @@ const workerSchema = new mongoose.Schema({
     min: 0,
   },
 });
+workerSchema.methods.generatesToken = function () {
+  const token = jwt.sign(
+    { _id: this._id, userName: this.userName, roll: "worker" },
+    "jwtWebToken"
+  );
+  return token;
+};
 //function to check the data from req.body of post requist
 function validate(worker) {
   const schema = {

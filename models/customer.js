@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const joi = require("joi");
 const debug = require("debug")("app:workerSchema");
 const { addressSchema } = require("./address");
+const jwt = require("jsonwebtoken");
 //create schema for customer
 const customerSchema = new mongoose.Schema({
   firstName: {
@@ -78,6 +79,13 @@ const customerSchema = new mongoose.Schema({
     default: false,
   },
 });
+customerSchema.methods.generatesToken = function () {
+  const token = jwt.sign(
+    { _id: this._id, userName: this.userName, roll: "customer" },
+    "jwtWebToken"
+  );
+  return token;
+};
 //function to check the data from req.body of post requist
 function validate(customer) {
   const schema = {

@@ -14,16 +14,16 @@ Router.post("/", async (req, res) => {
     if (!worker) return res.status(400).send("Username or Password is wrong");
     const result = await bcrypt.compare(req.body.password, worker.password);
     if (!result) return res.status(400).send("Username or Password is wrong");
-    const token = jwt.sign({ _id: worker._id }, "jwtPrivateKey");
-    return res.send(token);
+    const token = worker.generatesToken();
+    return res.header("x-auth-token", token).send(worker);
   }
   if (req.body.roll === "Hire") {
     const customer = await getCustomerByName(req.body.userName);
     if (!customer) return res.status(400).send("Username or Password is wrong");
     const result = await bcrypt.compare(req.body.password, customer.password);
     if (!result) return res.status(400).send("Username or Password is wrong");
-    const token = jwt.sign({ _id: customer._id }, "jwtPrivateKey");
-    return res.send(token);
+    const token = customer.generatesToken();
+    return res.header("x-auth-token", token).send(customer);
   }
   return res.status(400).send(`Role cant be ${req.body.roll}`);
 });
