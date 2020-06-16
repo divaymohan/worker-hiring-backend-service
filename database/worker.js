@@ -3,6 +3,7 @@ const { workerSchema } = require("../models/worker");
 const { addressSchema } = require("../models/address");
 const { Address, addAddress, updateAddress } = require("./address");
 const { Work } = require("./work");
+const bcrypt = require("bcrypt");
 //creating model
 const Worker = mongoose.model("Worker", workerSchema);
 
@@ -53,6 +54,8 @@ async function addWorker(_worker) {
     skills: skills,
     pricePerDay: _worker.pricePerDay,
   });
+  const salt = await bcrypt.genSalt(10);
+  worker.password = await bcrypt.hash(worker.password, salt);
   if (_worker.address) {
     const address = await addAddress(_worker.address);
     worker.address = address;
