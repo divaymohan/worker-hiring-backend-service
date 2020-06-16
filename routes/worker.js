@@ -13,9 +13,10 @@ const {
 const { validate, validateSkills } = require("../models/worker");
 const express = require("express");
 const Router = express.Router();
+const auth = require("../middleware/auth");
 
 //get all workers
-Router.get("/", async (req, res) => {
+Router.get("/", auth, async (req, res) => {
   return res.send(await getWorkers());
 });
 //get one worker

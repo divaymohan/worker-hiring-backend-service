@@ -5,5 +5,9 @@ module.exports = function (req, res, next) {
     return res.status(401).send("Access denied, You are not authorized");
   try {
     const decode = jwt.verify(token, "jwtWebToken");
-  } catch {}
+    req.user = decode;
+    next();
+  } catch {
+    return res.status(401).send("Token Not Found For This Account..!!");
+  }
 };
