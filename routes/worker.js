@@ -62,7 +62,11 @@ Router.post("/", async (req, res) => {
       .send("User with this email id already registered..!!");
   }
   const result = await addWorker(req.body);
-  return res.send(result);
+  const token = result.generatesToken();
+  return res
+    .header("x-auth-token", token)
+    .header("access-control-expose-headers", "x-auth-token")
+    .send(result);
 });
 //update worker address
 Router.put("/update/address/:id", async (req, res) => {

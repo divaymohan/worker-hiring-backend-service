@@ -38,7 +38,11 @@ Router.post("/", async (req, res) => {
     return res.status(400).send("Customer with this email id already exists");
   }
   customer = await addCustomer(req.body);
-  return res.send(customer);
+  const token = customer.generatesToken();
+  return res
+    .header("x-auth-token", token)
+    .header("access-control-expose-headers", "x-auth-token")
+    .send(customer);
 });
 //update customer
 Router.put("/:id", async (req, res) => {
