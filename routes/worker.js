@@ -16,7 +16,7 @@ const Router = express.Router();
 const auth = require("../middleware/auth");
 
 //get all workers
-Router.get("/", auth, async (req, res) => {
+Router.get("/", async (req, res) => {
   return res.send(await getWorkers());
 });
 //get one worker
