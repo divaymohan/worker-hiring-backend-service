@@ -7,14 +7,12 @@ const jwt = require("jsonwebtoken");
 const customerSchema = new mongoose.Schema({
   firstName: {
     type: String,
-    required: true,
     minlength: 4,
     maxlength: 255,
     trim: true,
   },
   lastName: {
     type: String,
-    required: true,
     minlength: 4,
     maxlength: 255,
     trim: true,
@@ -89,13 +87,13 @@ customerSchema.methods.generatesToken = function () {
 //function to check the data from req.body of post requist
 function validate(customer) {
   const schema = {
-    firstName: joi.string().min(4).max(255).required(),
-    lastName: joi.string().max(255).min(4).required(),
+    firstName: joi.string().min(4).max(255),
+    lastName: joi.string().max(255).min(4),
     middleName: joi.string().max(255).min(4),
-    userName: joi.string().max(255).min(4),
+    userName: joi.string().max(255).min(4).required(),
     email: joi.string().email().required(),
-    phoneNumber: joi.number().min(1000000000).max(9999999999),
-    password: joi.string().min(3).max(255),
+    phoneNumber: joi.number().min(1000000000).max(9999999999).required(),
+    password: joi.string().min(3).max(255).required(),
     address: joi.object(),
     isSpecial: joi.bool(),
   };

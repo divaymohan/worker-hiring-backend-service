@@ -20,6 +20,12 @@ async function getCustomerByName(username) {
   if (!cust) return;
   return cust;
 }
+//getByemail
+async function getCustomerByEmail(email) {
+  const cust = await Customer.findOne({ email: email });
+  if (!cust) return;
+  return cust;
+}
 //add new address
 async function addCustomer(_customer) {
   const customer = new Customer({
@@ -84,5 +90,6 @@ module.exports = {
   deleteCustomer,
   getCustomerByName,
   updateAddressOfCustomer,
+  getCustomerByEmail,
   Customer,
 };

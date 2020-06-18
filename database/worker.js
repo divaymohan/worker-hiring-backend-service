@@ -23,6 +23,7 @@ async function getWorkerByUserName(_username) {
   if (!worker) return;
   return worker;
 }
+
 //get one worker by email
 async function getWorkerByEmail(_email) {
   const worker = await Worker.findOne({ email: _email });

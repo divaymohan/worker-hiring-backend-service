@@ -49,6 +49,18 @@ Router.get("/byUname/:uname", async (req, res) => {
 Router.post("/", async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
+  let worker = await getWorkerByUserName(req.body.userName);
+  if (worker) {
+    return res
+      .status(400)
+      .send("User with this Username already registered..!!");
+  }
+  worker = await getWorkerByEmail(req.body.email);
+  if (worker) {
+    return res
+      .status(400)
+      .send("User with this email id already registered..!!");
+  }
   const result = await addWorker(req.body);
   return res.send(result);
 });
