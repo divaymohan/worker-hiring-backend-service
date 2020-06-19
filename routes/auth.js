@@ -31,7 +31,7 @@ Router.post("/", async (req, res) => {
     return res
       .header("x-auth-token", token)
       .header("access-control-expose-headers", "x-auth-token")
-      .send(token);
+      .send(customer);
   }
   return res.status(400).send(`Role cant be ${req.body.roll}`);
 });
