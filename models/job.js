@@ -74,8 +74,15 @@ function validate(job) {
   };
   return joi.validate(job, schema);
 }
+function validateHistory(req) {
+  const schema = {
+    _id: joi.string().required(),
+  };
+  return joi.validate(req, schema);
+}
 
 module.exports = {
   validate,
   jobSchema,
+  validateHistory,
 };

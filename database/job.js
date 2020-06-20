@@ -36,9 +36,23 @@ async function cancleJob(_id) {
   const result = await Job.deleteOne({ _id: _id });
   return result;
 }
+async function getWorkerHistory(workerId) {
+  const customers = await Job.find({
+    "worker._id": workerId,
+  });
+  return customers;
+}
+async function getCustomerHistory(custId) {
+  const customers = await Job.find({
+    "customer._id": custId,
+  });
+  return customers;
+}
 
 module.exports = {
   getJob,
   addJob,
   getJobs,
+  getWorkerHistory,
+  getCustomerHistory,
 };
