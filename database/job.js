@@ -30,3 +30,15 @@ async function addJob(_job) {
   });
   return await job.save();
 }
+async function cancleJob(_id) {
+  const job = await Job.findById(_id);
+  if (!job) return;
+  const result = await Job.deleteOne({ _id: _id });
+  return result;
+}
+
+module.exports = {
+  getJob,
+  addJob,
+  getJobs,
+};
