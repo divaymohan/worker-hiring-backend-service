@@ -75,7 +75,7 @@ async function updateWorker(id, _worker) {
   if (_worker.phoneNumber) worker.phoneNumber = _worker.phoneNumber;
   if (_worker.password) worker.password = _worker.password;
   if (_worker.pricePerDay) worker.pricePerDay = _worker.pricePerDay;
-  return await _worker.save();
+  return await worker.save();
 }
 //update the address
 
