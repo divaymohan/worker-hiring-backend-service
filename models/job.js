@@ -45,7 +45,7 @@ const jobSchema = new mongoose.Schema({
       },
       pricePerDay: {
         type: Number,
-        required: true,
+        // required: true,
         min: 0,
       },
     }),
@@ -66,10 +66,10 @@ const jobSchema = new mongoose.Schema({
 
 function validate(job) {
   const schema = {
-    customerId: joi.ObjectId().require(),
-    workerId: joi.ObjectId().required(),
-    dateStart: joi.Date(),
-    dateEnd: joi.Date(),
+    customerId: joi.string().required(),
+    workerId: joi.string().required(),
+    dateStart: joi.date(),
+    dateEnd: joi.date(),
     numberOfDays: joi.number().min(1),
   };
   return joi.validate(job, schema);
