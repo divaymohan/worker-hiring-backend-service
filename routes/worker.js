@@ -11,7 +11,11 @@ const {
   updateAddressOfWorker,
   addRating,
 } = require("../database/worker");
-const { validate, validateSkills } = require("../models/worker");
+const {
+  validate,
+  validateSkills,
+  validateRating,
+} = require("../models/worker");
 const express = require("express");
 const Router = express.Router();
 const auth = require("../middleware/auth");

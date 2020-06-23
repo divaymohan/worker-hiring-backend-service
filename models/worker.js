@@ -112,7 +112,7 @@ function validateSkills(_skills) {
 //validate function to add rating
 function validateRating(_rating) {
   const schema = {
-    rating: joi.number().mon(1).max(5),
+    rating: joi.number().min(1).max(5),
   };
   return joi.validate(_rating, schema);
 }
