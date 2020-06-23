@@ -72,6 +72,11 @@ const workerSchema = new mongoose.Schema({
     type: Number,
     min: 0,
   },
+  rating: {
+    type: Number,
+    min: 0,
+    max: 5,
+  },
 });
 workerSchema.methods.generatesToken = function () {
   const token = jwt.sign(
@@ -93,6 +98,7 @@ function validate(worker) {
     address: joi.object(),
     workIds: joi.array().items(joi.objectId()),
     pricePerDay: joi.number().min(0),
+    rating: joi.number().min(1).max(5),
   };
   return joi.validate(worker, schema);
 }
@@ -103,9 +109,17 @@ function validateSkills(_skills) {
   };
   return joi.validate(_skills, schema);
 }
+//validate function to add rating
+function validateRating(_rating) {
+  const schema = {
+    rating: joi.number().mon(1).max(5),
+  };
+  return joi.validate(_rating, schema);
+}
 
 module.exports = {
   workerSchema: workerSchema,
   validate: validate,
   validateSkills: validateSkills,
+  validateRating: validateRating,
 };

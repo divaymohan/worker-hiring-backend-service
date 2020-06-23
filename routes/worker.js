@@ -9,6 +9,7 @@ const {
   updateWorker,
   deleteWorker,
   updateAddressOfWorker,
+  addRating,
 } = require("../database/worker");
 const { validate, validateSkills } = require("../models/worker");
 const express = require("express");
@@ -106,6 +107,15 @@ Router.delete("/remove/skill/:id", async (req, res) => {
 Router.delete("/:id", async (req, res) => {
   const result = await deleteWorker(req.params.id);
   if (!result || result.n == 0)
+    return res.status(400).send(`No worker found with id ${req.params.id}`);
+  return res.send(result);
+});
+//adding rating
+Router.put("/add/rating/:id", async (req, res) => {
+  const { error } = validateRating(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+  const result = await addRating(req.params.id, req.body);
+  if (!result)
     return res.status(400).send(`No worker found with id ${req.params.id}`);
   return res.send(result);
 });

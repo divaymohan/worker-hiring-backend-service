@@ -133,7 +133,13 @@ async function deleteWorker(id) {
 
   return await Worker.deleteOne({ _id: id });
 }
-
+//add rating to the worker end point
+async function addRating(id, _rating) {
+  const worker = await Worker.findById(id);
+  if (!worker) return;
+  worker.rating = _rating.rating;
+  return worker.save();
+}
 module.exports = {
   getWorker: getWorker,
   getWorkerByEmail: getWorkerByEmail,
@@ -145,5 +151,6 @@ module.exports = {
   updateWorker: updateWorker,
   deleteWorker: deleteWorker,
   updateAddressOfWorker: updateAddressOfWorker,
+  addRating: addRating,
   Worker,
 };
