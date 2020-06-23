@@ -48,6 +48,12 @@ async function getCustomerHistory(custId) {
   });
   return customers;
 }
+async function updateRating(_id, _rating) {
+  const job = await Job.findById(_id);
+  if (!job) return;
+  job.jobRating = _rating.rating;
+  return await job.save();
+}
 
 module.exports = {
   getJob,
@@ -55,4 +61,5 @@ module.exports = {
   getJobs,
   getWorkerHistory,
   getCustomerHistory,
+  updateRating,
 };

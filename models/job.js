@@ -62,6 +62,11 @@ const jobSchema = new mongoose.Schema({
     type: Number,
     min: 1,
   },
+  jobRating: {
+    type: Number,
+    min: 0,
+    max: 5,
+  },
 });
 
 function validate(job) {
@@ -71,6 +76,7 @@ function validate(job) {
     dateStart: joi.date(),
     dateEnd: joi.date(),
     numberOfDays: joi.number().min(1),
+    jobRating: joi.number().min(0).max(5),
   };
   return joi.validate(job, schema);
 }
@@ -80,9 +86,16 @@ function validateHistory(req) {
   };
   return joi.validate(req, schema);
 }
+function validateRating(_rating) {
+  const schema = {
+    rating: joi.number().min(0).max(5),
+  };
+  return joi.validate(_rating, schema);
+}
 
 module.exports = {
   validate,
   jobSchema,
   validateHistory,
+  validateRating,
 };
