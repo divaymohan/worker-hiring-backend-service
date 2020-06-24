@@ -73,7 +73,7 @@ const workerSchema = new mongoose.Schema({
     min: 0,
   },
   rating: {
-    type: Number,
+    type: float,
     min: 0,
     max: 5,
   },
