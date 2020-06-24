@@ -60,6 +60,12 @@ async function updateCancleStatus(_id, _cancle) {
   job.isCancled = _cancle.isCancled;
   return await job.save();
 }
+async function updateAcceptState(_id, _accept) {
+  const job = await Job.findById(_id);
+  if (!job) return;
+  job.isAccepted = _accept.isAccepted;
+  return await job.save();
+}
 
 module.exports = {
   getJob,
@@ -69,4 +75,5 @@ module.exports = {
   getCustomerHistory,
   updateRating,
   updateCancleStatus,
+  updateAcceptState,
 };

@@ -71,6 +71,10 @@ const jobSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  isAccepted: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 function validate(job) {
@@ -82,6 +86,7 @@ function validate(job) {
     numberOfDays: joi.number().min(1),
     jobRating: joi.number().min(0).max(5),
     isCancled: joi.boolean(),
+    isAccepted: joi.boolean(),
   };
   return joi.validate(job, schema);
 }
@@ -103,6 +108,12 @@ function validateCancle(_cancle) {
   };
   return joi.validate(_cancle, schema);
 }
+function validateAccept(_Accept) {
+  const schema = {
+    isAccepted: joi.boolean(),
+  };
+  return joi.validate(_Accept, schema);
+}
 
 module.exports = {
   validate,
@@ -110,4 +121,5 @@ module.exports = {
   validateHistory,
   validateRating,
   validateCancle,
+  validateAccept,
 };
