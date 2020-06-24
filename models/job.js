@@ -109,4 +109,5 @@ module.exports = {
   jobSchema,
   validateHistory,
   validateRating,
+  validateCancle,
 };

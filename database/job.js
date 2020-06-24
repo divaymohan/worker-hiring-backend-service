@@ -54,6 +54,12 @@ async function updateRating(_id, _rating) {
   job.jobRating = _rating.rating;
   return await job.save();
 }
+async function updateCancleStatus(_id, _cancle) {
+  const job = await Job.findById(_id);
+  if (!job) return;
+  job.isCancled = _cancle.isCancled;
+  return await job.save();
+}
 
 module.exports = {
   getJob,
@@ -62,4 +68,5 @@ module.exports = {
   getWorkerHistory,
   getCustomerHistory,
   updateRating,
+  updateCancleStatus,
 };

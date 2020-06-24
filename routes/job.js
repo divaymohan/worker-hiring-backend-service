@@ -1,12 +1,18 @@
 const express = require("express");
 const Router = express.Router();
-const { validate, validateHistory, validateRating } = require("../models/job");
+const {
+  validate,
+  validateHistory,
+  validateRating,
+  validateCancle,
+} = require("../models/job");
 const {
   getJob,
   addJob,
   getWorkerHistory,
   getCustomerHistory,
   updateRating,
+  updateCancleStatus,
 } = require("../database/job");
 Router.get("/:id", async (req, res) => {
   const job = await getJob(req.params.id);
@@ -38,6 +44,13 @@ Router.put("/job/rating/:id", async (req, res) => {
   const { error } = validateRating(req.body);
   if (error) return res.status(400).send(error.details[0].message);
   const result = await updateRating(req.params.id, req.body);
+  if (!result) return res.status(400).send("job not found");
+  return res.send(result);
+});
+Router.put("/job/cancle/:id", async (req, res) => {
+  const { error } = validateCancle(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+  const result = await updateCancleStatus(req.params.id, req.body);
   if (!result) return res.status(400).send("job not found");
   return res.send(result);
 });
